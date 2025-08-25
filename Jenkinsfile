@@ -87,9 +87,10 @@ pipeline {
 
   post {
     always {
-      echo 'Cleaning up local Docker images...'
-      sh 'docker rmi ${FULL_IMAGE} || true'
-      sh 'docker rmi ${LATEST_IMAGE} || true'
+        node {
+            sh 'docker rmi my-image || true'
+        }
     }
-  }
+}
+
 }
