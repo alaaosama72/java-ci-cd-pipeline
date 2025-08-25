@@ -85,12 +85,19 @@ pipeline {
     }
   }
 
-  post {
-    success { echo "✅ Success: ${env.FULL_IMAGE}" }
-    failure { echo "❌ Build failed" }
+post {
     always {
-      sh 'docker logout || true'
-      cleanWs(deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true)
+        node {
+            sh 'docker rmi my-image || true'
+        }
     }
-  }
 }
+
+post {
+    always {
+        node {
+            sh 'docker rmi my-image || true'
+        }
+    }
+}
+
