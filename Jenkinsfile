@@ -87,10 +87,7 @@ pipeline {
 
   post {
     always {
-        node {
-            sh 'docker rmi my-image || true'
-        }
+      sh 'docker rmi my-image || true'
     }
-}
-
+  }
 }
